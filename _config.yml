@@ -1,8 +1,11 @@
 # This is the default format. 
 # For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:categories/:year/:month/:day/:title 
+#permalink: /:categories/:year/:month/:day/:title 
+permalink: /blog/:year/:month/:day/:title
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+#auto: true
+#markdown: rdiscount
 pygments: true
 
 # Themes are encouraged to use these universal variables 
@@ -115,7 +118,26 @@ JB :
   # Set 'provider' to false to turn sharing off globally.
   #
   sharing :
-    provider : false
+   provider : all
+   twitter :
+     size :
+     via :
+     count :
+   facebook :
+     appid : 205602882797935
+     layout : button_count
+     font :
+     faces : false
+     width : 90
+   googleplus :
+     size : medium
+     width :
+     annotation : bubble
+   linkedin :
+     counter : right
+
+  #sharing :
+    #provider : false
     
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
