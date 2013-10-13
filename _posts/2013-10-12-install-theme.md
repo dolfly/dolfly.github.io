@@ -2,7 +2,7 @@
 layout: post
 title: "安装新主题"
 description: ""
-category: ""
+category: "blog"
 tags: [jekyll,]
 ---
 {% include JB/setup %}

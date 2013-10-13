@@ -20,7 +20,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-align: center; /* center align it with the container */
 }
 .container {
-  /*width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+  width: 900px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+}
+.navbar-brand {
+    font-size: 33px;
 }
 /* The white background content wrapper */
 .content {
@@ -83,7 +86,7 @@ a {
 	color:#FFF;
 }
 pre {
-    background-color:#27333f;
+    background-color:#000000;
 }
 code {
     background-color:transparent;

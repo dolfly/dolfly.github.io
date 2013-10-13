@@ -1,8 +1,10 @@
 ---
 layout: post
-title: "Hello World"
+title: "python学习"
 description: ""
-categories: "" 
+category: "book"
 tags: []
 ---
 {% include JB/setup %}
+
+#第一章
