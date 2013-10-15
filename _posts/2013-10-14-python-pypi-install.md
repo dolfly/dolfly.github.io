@@ -47,15 +47,15 @@ exec pypi-server -p 3141 /search/ziyuan/pypiserver/packages
 到这里其实pypi-server的安装已经完成了。但是我们安装好了要用，这才是重点。  
 **上传package**  
 假设我们已经做好了一个package，如何上传到指定的私有源呢？
-首先上传需要用户名和密码，这个需要在服务端生成，密码文件使用命令htpasswd生成
+首先上传需要用户名和密码，这个需要在服务端生成，密码文件使用命令htpasswd生成。首先安装passlib模块
 {% highlight sh%}
     pip install passlib
 {% endhighlight %}
-由于我使用的readhat,并没有在yum中找到apache2-utils源，只有自己下载安装了。[下载地址](http://download.opensuse.org/factory/repo/src-oss/suse/src/apache2-2.4.6-7.3.src.rpm)  
+然后安装apache2-utils模块。由于我使用的readhat,并没有在yum中找到apache2-utils源，只有自己下载安装了。[下载地址](http://download.opensuse.org/factory/repo/src-oss/suse/src/apache2-2.4.6-7.3.src.rpm)  
 {% highlight sh%}
      rpm -ivh apache2-2.4.6-7.3.src.rpm
 {% endhighlight %}
-然后生成密码：  
+最后生成用户名和密码:
 {% highlight sh%}
      htpasswd -sc /PATH/.htaccess user #回车输入密码。输入：123
 {% endhighlight %}
