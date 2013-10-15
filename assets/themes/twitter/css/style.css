@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .page-header {
   padding: 20px 20px 10px;
   margin: -20px -20px 20px;
-  border-bottom:5px solid #B93535;
+  border-bottom:2px solid #C7C1C1;
 }
 
 .topbar .btn {
@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	overflow:hidden;
 }
 a {
-    color: #DF120A;
+    color: #D66472;
     text-decoration: none;
 }
 .tag_box li {
