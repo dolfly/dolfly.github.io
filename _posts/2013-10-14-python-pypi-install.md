@@ -84,3 +84,4 @@ exec pypi-server -p 3141 /search/ziyuan/pypiserver/packages
    pip install -i http://localhost:3141/simple/ packagename
    easy_install -i http://localhost:3141/simple/ packagename
 {% endhighlight %}
+到这里，pypiserver的安装和使用已经完成了，但是其原理还需要研究，以后要做到定制一些功能~

@@ -9,15 +9,39 @@ body {
   line-height: 20px;
   color: #333;
 }
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'Ubuntu',"Microsoft YaHei", "微软雅黑",Tahoma,sans-serif;
   padding-top: 20px; /* 40px to make the container go all the way to the bottom of the topbar */
-  font-size: 31.5px;
   font-weight: bold;
 }
+h1, .h1 {
+    font-size: 36px;
+}
+h2, .h2 {
+    font-size: 31px;
+}
+
+h3, .h3 {
+    font-size: 25px;
+}
+
+h4, .h4 {
+    font-size: 20px;
+}
+
+h5, .h5 {
+    font-size: 18px;
+}
+
+h6, .h6 {
+    font-size: 18px;
+}
+
 .navbar-inverse {
     background-color:#27333f;
-    font-size: 16px;
+    font-size: 20px;
+    color: #FFFFFF;
 }
 .container > footer p {
   text-align: center; /* center align it with the container */
