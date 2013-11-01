@@ -230,7 +230,20 @@ $ locate easy-install.path
   /usr/lib/python2.6/site-packages/easy-install.pth
   /usr/lib64/python2.6/site-packages/easy-install.pth
 {% endhighlight %}
-亲测第一个文件是我们要找的文件，具体原因现在还没研究，先能用再说吧。
+亲测第一个文件是我们要找的文件，具体原因现在还没研究，先能用再说吧。  
+{% highlight sh%}
+#ps:当运行安装程序发现最后几行信息:
+...
+Processing myproject-0.1.0-py2.6.egg
+creating /root/.local/lib/python2.6/site-packages/myproject-0.1.0-py2.6.egg
+Extracting myproject-0.1.0-py2.6.egg to /root/.local/lib/python2.6/site-packages
+Adding myproject 0.1.0 to easy-install.pth file
+
+Installed /root/.local/lib/python2.6/site-packages/myproject-0.1.0-py2.6.egg
+Processing dependencies for myproject==0.1.0
+Finished processing dependencies for myproject==0.1.0
+#*可以看出包的安装路径和包的路径信息都能找到，删除相应的包和路径就会发现无法使用该包了。
+{% endhighlight %}
 打开文件，删除./myproject-0.1.0-py2.6.egg这一行，再次运行python时就会提示找不到该包
 {% highlight sh %}
 >>> from myproject import test
