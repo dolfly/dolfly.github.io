@@ -223,28 +223,21 @@ $ tree
 **7, 卸载程序**  
 安装过的python包，如果要删除该如何做呢？
 首先要找到easy-install.pth文件,这个文件是自动查询安装包的路径的文件，如果把安装包的路径从这个文件中去掉，将找不到要使用的包
-{% highlight sh %}
-$ locate easy-install.path
-  /root/.local/lib/python2.6/site-packages/easy-install.pth
-  /search/virtual/pypienv/lib/python2.6/site-packages/easy-install.pth
-  /usr/lib/python2.6/site-packages/easy-install.pth
-  /usr/lib64/python2.6/site-packages/easy-install.pth
-{% endhighlight %}
-亲测第一个文件是我们要找的文件，具体原因现在还没研究，先能用再说吧。  
+当运行安装程序发现最后几行信息:  
 {% highlight sh%}
-#ps:当运行安装程序发现最后几行信息:
-...
-Processing myproject-0.1.0-py2.6.egg
-creating /root/.local/lib/python2.6/site-packages/myproject-0.1.0-py2.6.egg
-Extracting myproject-0.1.0-py2.6.egg to /root/.local/lib/python2.6/site-packages
-Adding myproject 0.1.0 to easy-install.pth file
+$ python setup.py install
+  ...
+  Processing myproject-0.1.0-py2.6.egg
+  creating /root/.local/lib/python2.6/site-packages/myproject-0.1.0-py2.6.egg
+  Extracting myproject-0.1.0-py2.6.egg to /root/.local/lib/python2.6/site-packages
+  Adding myproject 0.1.0 to easy-install.pth file
 
-Installed /root/.local/lib/python2.6/site-packages/myproject-0.1.0-py2.6.egg
-Processing dependencies for myproject==0.1.0
-Finished processing dependencies for myproject==0.1.0
-#*可以看出包的安装路径和包的路径信息都能找到，删除相应的包和路径就会发现无法使用该包了。
+  Installed /root/.local/lib/python2.6/site-packages/myproject-0.1.0-py2.6.egg
+  Processing dependencies for myproject==0.1.0
+  Finished processing dependencies for myproject==0.1.0
 {% endhighlight %}
-打开文件，删除./myproject-0.1.0-py2.6.egg这一行，再次运行python时就会提示找不到该包
+可以看出包的安装路径和包的路径信息都能找到，删除相应的包和路径就会发现无法使用该包了。  
+打开文件easy-install.pth，删除./myproject-0.1.0-py2.6.egg这一行，或者直接删除安装好的egg包,再次运行python时就会提示找不到该包
 {% highlight sh %}
 >>> from myproject import test
 Traceback (most recent call last):
