@@ -17,9 +17,72 @@ tags: [setuptools, python]
     │   ├── command-line
     │   └── myproject
     └── myproject
-        ├── command_line.py
+        ├── cmds.py
         ├── __init__.py
         └── __init__.pyc
 
 3 directories, 6 files
 {% endhighlight %}
+可以看出，比myproject一共多了三个文件command-line, myproject, cmds.py三个文件和bin这个文件夹。下面对他们进行详细的介绍：
+command-line，mypreject文件  
+这两个文件的内容很简单
+{% highlight sh%}
+$ cat command-line 
+  #!/usr/bin/env python
+  import myproject
+  myproject.test()
+$ cat myproject
+  #!/usr/bin/env python
+  print 'welcome to command line mod!\n'
+{% endhighlight %}
+可以看出，command-line文件只是调用了myproject的test函数，二myproject只是输出了一个字符串，为了能够执行这两个文件，并且是通过命令行的方式，我们需要在setup.py这个文件中添加下面这个配置：
+{% highlight sh%}
+scripts=['src/bin/command-line', 'src/bin/myproject'],
+{% endhighlight %}
+然后安装修改后的源码包:
+{% highlight sh%}
+$ python setup.py install
+...
+Installing command-line script to /search/virtual/pypienv/bin
+Installing myproject script to /search/virtual/pypienv/bin
+...
+{% endhighlight %}
+我们可以看到上面的输出，其含义就是把这两个脚本安装在了bin目录下，由于这个路径是PATH路径，所以可以直接通过命令进行执行了，下面是执行的效果：
+{% highlight sh%}
+$ command-line 
+  Hello World!
+$ myproject
+  welcome to command line mod!
+{% endhighlight %}
+还有一个文件是cmds.py这个文件也是可以通过命令行直接运行的，只不过是通过另外一种方式进行安装的
+先看一下cmds.py的内容吧：
+{% highlight sh%}
+$ cat cmds.py 
+  import myproject 
+  def main():
+      myproject.test()
+{% endhighlight %}
+可以看出，其实这个文件和command-line一样，引用了myproject并输出，唯一不同的是他自己顶一个了一个函数main来调用。
+同样setup.py中也要添加一个配置，来找到这个文件并对其进行编译：
+{% highlight sh%}
+entry_points = {
+                 'console_scripts': ['cmds=myproject.cmds:main'],
+                }
+{% endhighlight %}
+这个配置和前面的不一样，并且里面指定了要执行的脚本的函数名，通过从新安装我们可以看：
+{% highlight sh%}
+$ python setup.py install
+  ...
+  Installing cmds script to /search/virtual/pypienv/bin
+  ...
+{% endhighlight %}
+同样，这个文件编译后也放到在PATH下，通过命令行可以运行：
+{% highlight sh%}
+$ cmds 
+  Hello World!
+{% endhighlight %}
+到这里一个通过命令行运行的包就介绍完了.
+同样我们可以这个写好的包上传到私有源，然后在其他机器上下载安装，同样可以运行~
+
+
+
