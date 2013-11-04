@@ -1,8 +1,0 @@
----
-layout: post
-title: "Hello World"
-description: ""
-categories: "" 
-tags: []
----
-{% include JB/setup %}

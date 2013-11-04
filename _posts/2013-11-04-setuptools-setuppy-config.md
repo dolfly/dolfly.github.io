@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "setuptools setup.py config"
+title: "setuptools配置文件参数详解"
 description: ""
 category: ""
 tags: []
@@ -14,6 +14,10 @@ tags: []
 这个参数主要是标识工程的名字。这个名字就是打包后的包的名字。  
 **version**  
 这个参数主要是标识工程的版本号，打包后的名字包含这个版本号。  
+在安装同一个包的不同版本是可以用如下命令：
+{% highlight sh %}
+$ pip install -i http://10.11.215.61:3141/simple/ myproject==1.1.7 
+{% endhighlight %}
 **packages**  
 这个参数主要是说明要打包的工程的源代码路径，默认不写的话是从本工程的根目录开始，也可自定义，要引入find_packages函数，函数参数是包的相对路径.。  
 **package_dir**  
