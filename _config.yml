@@ -1,7 +1,8 @@
 # This is the default format. 
 # For more see: http://jekyllrb.com/docs/permalinks/
 #permalink: /:categories/:year/:month/:day/:title 
-permalink: /blog/:year/:month/:day/:title
+#permalink: /blog/:year/:month/:day/:title
+permalink: /blog/:year-:month-:day-:title
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 #auto: true
@@ -118,7 +119,8 @@ JB :
   # Set 'provider' to false to turn sharing off globally.
   #
   sharing :
-   provider : all
+   #provider : all
+   provider : googleplus
    twitter :
      size :
      via :
