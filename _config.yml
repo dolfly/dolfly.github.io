@@ -12,14 +12,14 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : ITlog
+title : 灵步稚鹰
 tagline: Site Tagline
 author :
-  name : sean chen 
-  email : seanerchen@gmail.com 
-  github : seanerchen 
-  twitter : username
-  feedburner : feedname
+  name : dolfly
+  email : dolfly@foxmail.com
+  github : dolfly
+  twitter : dolfly
+  feedburner : dolfly
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -29,7 +29,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://seanerchen.github.io
+production_url : http://dolfly.github.io
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -86,7 +86,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : itlog 
+      short_name : dolfly
     livefyre :
       site_id : 123
     intensedebate :
