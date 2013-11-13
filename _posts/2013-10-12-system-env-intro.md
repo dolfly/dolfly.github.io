@@ -1,3 +1,11 @@
+---
+layout: post
+title: "软件开发环境配置规范"
+description: ""
+category: ""
+tags: []
+---
+{% include JB/setup %}
 # 软件开发环境配置规范
 
 ## 一.规范的意义
