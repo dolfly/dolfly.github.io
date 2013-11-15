@@ -1,6 +1,6 @@
 ---
 layout: index 
-title: litcode
+title: 灵步稚鹰
 tagline: Supporting tagline
 ---
 {% include JB/setup %}

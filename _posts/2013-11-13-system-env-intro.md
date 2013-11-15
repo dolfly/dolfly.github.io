@@ -3,8 +3,9 @@ layout: post
 title: "软件开发环境配置规范"
 description: ""
 category: ""
-tags: []
+tags: [jekyll,]
 ---
+
 {% include JB/setup %}
 # 软件开发环境配置规范
 
@@ -89,11 +90,11 @@ tags: []
 
 1.mount 直接创建相应的 mount 加载点如 /sinasrv/www
 
-```
+{% highlight sh %}
 mount --bind 参数，通过这个方法可以把一个目录挂载到另一个目录下，例如：
 mount --bind /sinasrv/www/htdocs /data1/apache/htdocs mount --bind /sinasrv/www/logs /data2/apache/logs
 mount --bind /sinasrv/www/mmcache /data2/mmcache
-```
+{% endhighlight %}
 
 2.符号链接 (这个最常用)
 
@@ -105,10 +106,10 @@ sinasrv为项目组标识
 
 :        |目录          |权限       |用途
 ---------|--------------------|-------------------------------------------------
-缓存目录  |cache、*cache |读写      |用来保存有一定生存期限的临时数据，不提供数据备份服务。只供本地访问的目录cache；使用nfs文件系统共享的目录ncache；
-数据目录  |data、*data   |读写      |用来保存具有永久存在期限的数据，提供备份服务，默认每日自动做一次备份。只供本地访问的数据目录data;使用nfs文件系统共享的目录ndata
+缓存目录  |cache、\*cache |读写      |用来保存有一定生存期限的临时数据，不提供数据备份服务。只供本地访问的目录cache；使用nfs文件系统共享的目录ncache；
+数据目录  |data、\*data   |读写      |用来保存具有永久存在期限的数据，提供备份服务，默认每日自动做一次备份。只供本地访问的数据目录data;使用nfs文件系统共享的目录ndata
 私有目录 |privdata       |读     |用来保存不希望从web访问的数据，如配置信息，提供备份。只供本地访问的数据目录privdata;
-日志目录 |logs、*logs     |读写     |用来提供记录日志。应用程序日志记录applogs;
+日志目录 |logs、\*logs     |读写     |用来提供记录日志。应用程序日志记录applogs;
 上传目录 |upload、uploads、userupload、useruploads|读|用来提供上传数据存储
 文档目录 |www           |读   |web服务存储代码,读权限
 
@@ -122,7 +123,7 @@ sinasrv为项目组标识
 例如stow,php,perl
 软件根目录和子目录布局
 
-```
+{% highlight sh %}
 --prefix = /usr/local/sinasrv
 --exec_prefix = %{_prefix}
 --bindir = %{_exec_prefix}/bin
@@ -138,7 +139,7 @@ sinasrv为项目组标识
 --oldincludedir = /usr/include
 --infodir = %{_prefix}/info
 --mandir = %{_prefix}/man
-```
+{% endhighlight %}
 
 ##### 程序安装目录、数据根目录命名
 
@@ -157,23 +158,23 @@ MySQL安装目录    |/usr/local/sinasrv/mysql                       |
 
 /data1 磁盘创建如下目录:
 
-```
+{% highlight sh %}
 /data1/sinasrv/www/htdocs
 /data1/sinasrv/www/data
 /data1/sinasrv/www/cgi-bin
 /data1/sinasrv/mysql/
-```
+{% endhighlight %}
 
 /data2 磁盘创建如下目录:
 
-```
+{% highlight sh %}
 /data2/sinasrv/www/logs
 /data2/sinasrv/www/cache
 /data2/sinasrv/www/mmcache
 /data2/sinasrv/www/phpsession
 /data2/sinasrv/www/userupload
 /data2/sinasrv/mysql/
-```
+{% endhighlight %}
 
 对于1块数据盘的服务器，将数据盘加载在 /data1 目录下，所有的目录都创建在
 /data1/sinasrv 目录下。
@@ -234,7 +235,7 @@ Apache error_log 日志文件不归档，每日临晨0点自动清空。
 
 各个模块都采用 DSO 方式编译，启动时只选择常用的模块，如下:
 
-```
+{% highlight sh %}
    http_core.c
    mod_log_config.c
    mod_mime.c
@@ -250,7 +251,7 @@ Apache error_log 日志文件不归档，每日临晨0点自动清空。
    mod_negotiation.c
    mod_setenvif.c
    mod_php5.c 
-```  
+{% endhighlight %}  
 
 ###### 默认配置
 
@@ -258,7 +259,7 @@ httpd.conf 配置文件
 
 基本配置如下：
 
-```
+{% highlight sh %}
    ServerType standalone
    ServerRoot "/usr/local/sinasrv/apache"
    PidFile /sinasrv/www/logs/httpd.pid
@@ -307,13 +308,13 @@ httpd.conf 配置文件
    ErrorDocument 404 "Hi, The requested URL was not found on this server !"
    ErrorDocument 500 "Ooooooooooooops, I don't know what's happen !"
    
-   NameVirtualHost *:80
-```
+   NameVirtualHost \*:80
+{% endhighlight %}
 
 虚拟主机配置格式如下
 
-```
-   <VirtualHost *:80>
+{% highlight sh %}
+   <VirtualHost \*:80>
        ServerName news.survey.sina.com.cn
        ServerAdmin minghui@staff.sina.com.cn
        DocumentRoot /sinasrv/www/htdocs/news.survey.sina.com.cn/
@@ -327,7 +328,7 @@ httpd.conf 配置文件
        SetEnv SINASRV_NFSCACHE_DIR "/sinasrv/www/nfscache/news.survey.sina.com.cn/"
        SetEnv SINASRV_NFSHTDOCS_DIR "/sinasrv/www/nfshtdocs/news.survey.sina.com.cn/"
    </VirtualHost>
-```
+{% endhighlight %}
 ##### PHP
 ###### 相关目录、文件路径的命名
 ###### 编译规范
@@ -335,7 +336,7 @@ httpd.conf 配置文件
 采用DSO模式编译为 Apache 动态加载模块，需要先安装 Apache.
 扩展模块以DSO方式编译安装，启动时只加载需要使用的模块：
 
-```
+{% highlight sh %}
    ctype
    gd
    iconv
@@ -349,13 +350,13 @@ httpd.conf 配置文件
    tokenizer
    Turck MMCache
    xml
-```
+{% endhighlight %}
 ###### 默认配置
 php 使用 php.ini-recommended 作为模板配置文件，在此基础之上增加一些安全
 方面的设置。
 下面是对部分配置的说明
 
-```
+{% highlight sh %}
    - output_buffering = 4096   性能调节参数，默认是关闭的。
    - variables_order = "GPC"  性能调节参数，去掉了不常用的环境变量，
      只用Get,POST,Cookie，如果访问环境变量可以考虑调用getenv()
@@ -399,7 +400,7 @@ safe_mode_exec_dir = "/usr/local/sinasrv/php/bin/"
 说明：在这里指定的变量，即使用 safe_mode_allowed_env_vars 指定也不能修改。 safe_mode_protected_env_vars = LD_LIBRARY_PATH
 默认不允许用 fopen 函数读取打开远程服务器的网页
 allow_url_fopen Off
-```
+{% endhighlight %}
 
 ##### MySQL
 
@@ -431,7 +432,7 @@ MySQL 默认使用 my-large.cnf 作为配置文件，在此基础之上根据一
 需求进行特定性的优化配置。
 下面是一些主要的配置：
 
-```
+{% highlight sh %}
    [mysqld]
    datadir                 = /data2/mysql3308
    port                    = 3308
@@ -452,7 +453,7 @@ MySQL 默认使用 my-large.cnf 作为配置文件，在此基础之上根据一
    long_query_time         = 1
    server-id               = 0060173308
    log-bin
-```
+{% endhighlight %}
 MySQL 打开 --log-slow-queries 选择用来记录较慢的查许，方便程序性能分析和监控。
 设置 long_query_time = 1 ，记录查询时间超出 1 秒的访问。
 ##### Rsync
@@ -538,34 +539,34 @@ cgi-bin 目录设置同上。
 
 确保系统目录都有正确的用户属主
 
-```
+{% highlight sh %}
    chown -R root:root dev
    chown -R root:root etc
    chown -R root:root lib
    chown -R root:root sbin
    chown -R root:root usr
    chown -R root:root sinasrv/www/htdocs
-```
+{% endhighlight %}
 
 个别目录只能有 root 才能访问
 
-```
+{% highlight sh %}
    chmod 700 ./{bin,sbin};
    chmod 700 ./usr/{bin,sbin};
    chmod 700 ./usr/local/{bin,sbin}
-```
+{% endhighlight %}
 
 重要的系统配置文件只能由 root 可读写 ，比如 httpd.conf, php.ini, rsyncd.conf
 
-```
+{% highlight sh %}
 chmod 600 /usr/local/sinasrv/apache/conf/httpd.conf chmod 600 /usr/local/sinasrv/lib/php.ini 
-```
+{% endhighlight %}
 
 大多情况下，apache 是以 root 权限启动的，所以下面的目录也设置成仅 root 可访问
 
-```
+{% highlight sh %}
 chmod 700 /usr/local/sinasrv/apache/{bin,conf,libexec,logs}
-```
+{% endhighlight %}
 
 其他的lib目录考虑到php的库和ext模块会再执行期间访问，所以应该是其他用户可以访问的。
 
@@ -584,12 +585,12 @@ cd /sinasrv/www/htdocs && rsync -rltD . target::module-name
 
 #### 库文件存放和命名
 
-应用程序中的库文件放在统一的目录下，在程序的根目录下， 并且命名统一为： include ，库文件的扩展名目前可以考虑 为 *.inc, *.inc.php, *.lib.php
+应用程序中的库文件放在统一的目录下，在程序的根目录下， 并且命名统一为： include ，库文件的扩展名目前可以考虑 为 \*.inc, \*.inc.php, \*.lib.php
 文件命名
 不允许有中文名，文件名不允许包含有空格，不允许使用大写字母，应该符合 w3c的网页文件命名规范，即以：0-9,a-z,/. 符号构成。
 
 #### 文件扩展名
-c 或者 perl 等其他以 cgi 方式执行的程序，分别用 *.cgi *.pl 扩展名 php 的程序用 *.php, *.php3, *.php4, *.phtml 等作为扩展名
+c 或者 perl 等其他以 cgi 方式执行的程序，分别用 \*.cgi \*.pl 扩展名 php 的程序用 \*.php, \*.php3, \*.php4, \*.phtml 等作为扩展名
 下面扩展名结尾的文件不能从 web 访问
 sh, log, txt, sql, bak, bak2, old, 1, 2, php~
 
@@ -669,21 +670,21 @@ Apache/Nginx访问日志统计
 
 ##### 在系统后台运行的程序的相关说明
 
-###### 访问 SINASRV_* 变量的说明
+###### 访问 SINASRV_\* 变量的说明
 
-项目中，如果需要运行一些在后台执行的程序，比如在cron中执行的程序，或者在系统中运行的程序，这样的程序无法获得设置在Apache/Nginx环境变量中的SINASRV_*变量，为了解决这个问题，做了这样的约定：
+项目中，如果需要运行一些在后台执行的程序，比如在cron中执行的程序，或者在系统中运行的程序，这样的程序无法获得设置在Apache/Nginx环境变量中的SINASRV_\*变量，为了解决这个问题，做了这样的约定：
 
 项目的后台程序放在 /sinasrv/www/system 目录与项目域名同名的子目录下，如：/sinasrv/www/system/news.survey.sina.com.cn/
 在该目录下提供一个名字为： SINASRV_CONFIG 的文本文件
 
-1.这个文件中保存了 SINASRV_* 变量和对应的值，需要用户自己写程序解析出这些变量和值。
+1.这个文件中保存了 SINASRV_\* 变量和对应的值，需要用户自己写程序解析出这些变量和值。
 
 2.这个文件的名字和目录格式固定，系统配置升级后自动更新此文件，而不用升级应用程序。
 3.后台管理进程中访问 SINASRV_CONFIG 使用相对路径，如： $sinasrv_config = "./SINASRV_CONFIG"
 
-4.后台管理程序中访问其他目录如： htdocs, data, cache 目录，使用绝对路径，通过 SINASRV_* 变量实现，如：$file =$_SINASRV['SINASRV_CACHE_DIR'] . "/20050316/$filename"
+4.后台管理程序中访问其他目录如： htdocs, data, cache 目录，使用绝对路径，通过 SINASRV_\* 变量实现，如：$file =$_SINASRV\['SINASRV_CACHE_DIR'\] . "/20050316/$filename"
 
-这里假设你的程序读取 SINASRV_CONFIG 文件解析出的 SINASRV_* 变量存在名为 $_SINASRV 的数组中。
+这里假设你的程序读取 SINASRV_CONFIG 文件解析出的 SINASRV_\* 变量存在名为 $_SINASRV 的数组中。
 
 ###### 后台执行程序的执行方式
 
@@ -792,16 +793,16 @@ rsync 时可以删除服务器上的文件嘛？
 
 1 只读数据库的负载均衡，有多种技术可选，暂时使用4层交换
   其他还有 DNS论询、4层交换、VRRP、ARP Spoof
-  * 只实现了4层交换
+  \* 只实现了4层交换
 
 2 数据库完整备份(每周执行一次)
-  * 已经实现
+  \* 已经实现
 
 3 数据库增量备份(每小时或者每日)
   X 还未实现
 
 4 数据库快速重建和灾难恢复(读取备份文件)
-  * 还未实现
+  \* 还未实现
 
 5 数据库健康检查和故障切换
   X 还未实现
