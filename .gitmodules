@@ -1,3 +1,6 @@
 [submodule "bootstrap"]
 	path = bootstrap
 	url = git@github.com:seanerchen/bootstrap.git
+[submodule "post"]
+	path = post
+	url = https://dolfly@bitbucket.org/dolfly/blog.git
